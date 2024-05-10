@@ -33,6 +33,20 @@ func multiplEOccurrence(nums []int, target int)[]int{
 	return occurrence
 }
 
+//Search in TwoDArray
+
+func LinearSeach2D(nums [][]int,val int)[][]int{
+	var occurence [][]int
+	for i,row := range nums{
+		for j,num := range row{
+			if num == val{
+				occurence = append(occurence,[]int{i,j})
+			}
+		}
+	}
+	return occurence
+}
+
 func main() {
 	arr := []int{20, 30, 40, 30,50,30, 60, 70, 80, 90}
 	val := 30
@@ -41,12 +55,21 @@ func main() {
 	fmt.Println("The source of array",target)
 	fmt.Println("Search item found",LinearSearch(arr,30))
 	//mutliple occurrence 
-	fmt.Println("Multiple occurrence",result,target)
+	//fmt.Println("Multiple occurrence",result,target)
 	//if item not found this session need to execute 
-	// if len(result)> 0{
-	// 	fmt.Println("Mutliple occurence found",result,val)
-	// }else{
-	// 	fmt.Println("Multiple occurence not found",val)
-	// }
+	if len(result)> 0{
+		fmt.Println("Mutliple occurence found",result,val)
+	}else{
+		fmt.Println("Multiple occurence not found",val)
+	}
 
+	// twoDarray 
+	twoD := [][]int{{1,4,5,5,6,4},{1,5,3,6,4,6},{1,4,5,5,6,4},{1,5,3,6,4,6}}
+	tar := 5
+	twoDres := LinearSeach2D(twoD,tar)
+	if len(twoDres)>0{
+		fmt.Println("Multiple occurence found",twoDres,tar)
+	}else{
+		fmt.Println("Multiple occurence not found",tar)
+	}
 }
