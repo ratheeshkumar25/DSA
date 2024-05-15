@@ -127,6 +127,65 @@ func (l *LinkedList)DeleteMiddle(){
 
 }
 
+func RecuReverseLinked(head *Node)*Node{
+	//Base condition
+	if head == nil || head.next == nil{
+		return head
+	}
+	newHead :=RecuReverseLinked(head.next)
+	head.next.next = head
+	head.next = nil 
+
+	return newHead
+}
+
+func DuplicateLinked(head *Node)*Node{
+	//Base condition 
+	if head == nil {
+		return head
+	}
+	temp := head
+	
+
+	for temp != nil {
+		ref  := temp
+		for ref.next != nil{
+			if temp.data == ref.data{
+				ref.next = ref.next.next
+			}else{
+				ref = ref.next
+			}
+		}
+		temp = temp.next
+	}
+	return head
+}
+
+func IsPlalindrome(head *Node)bool{
+	if head == nil || head.next == nil{
+		return true
+	}
+
+	//find the middle element of linklist
+	slow,fast := head,head
+	for fast != nil && fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+	}
+
+	secondhalf := RecuReverseLinked(slow)
+	firsthalf := head 
+
+	for secondhalf != nil {
+		if secondhalf.data != firsthalf.data{
+			return false
+		}
+		firsthalf = firsthalf.next
+		secondhalf = secondhalf.next
+	}
+	return true
+}
+
 func main() {
 	list := LinkedList{}
 
@@ -135,6 +194,10 @@ func main() {
 	list.AddtoHead(60)
 	list.AddtoHead(70)
 	list.AddtoHead(80)
+	list.AddtoHead(80)
+
+	list.Display()
+	
 
 	middle := middle(list.head)
 	
@@ -149,9 +212,18 @@ func main() {
 	fmt.Println("Deleted the middle of list")
 	list.Display()
 
-	index := linkedListArray(list.head)
-	fmt.Println("After reversing link list to array",index)
+	RecuReverseLinked(list.head)
+	fmt.Println("After Reversing the linked list")
+	list.Display()
+
+	 index := linkedListArray(list.head)
+	 fmt.Println("After reversing link list to array",index)
+
 	
+	
+	list.head = DuplicateLinked(list.head)
+	fmt.Println("After removing the duplicate",list.head)
+	list.Display()
 
 	
 }

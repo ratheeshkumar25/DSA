@@ -35,9 +35,41 @@ func SecondLarget(arr[]int)int{
 	return secondlar
 }
 
+func RemoveDuplicate(arr []int)[]int{
+	// num := []int{}
+	// for i :=0 ; i<len(arr)-1;i++{
+	// 	isDuplicate := false
+	// 	for j:=i+1;j<len(arr);j++{
+	// 		if arr[i]  == arr[j]{
+	// 			isDuplicate = true
+	// 			break
+	// 		}
+	// 	}
+	// 	if !isDuplicate{
+	// 		num = append(num,arr[i])
+	// 	}
+	// }
+	// return num
+
+	removeMap := make(map[int]bool)
+	unique := []int{}
+	
+	for _,val := range arr{
+		if !removeMap[val] {
+			removeMap[val] = true
+			unique = append(unique, val)
+		}
+	}
+	return unique
+}
+
+
 func main(){
-	arr := []int{24,15,15,22,10,33,44,55}
+	arr := []int{24,15,15,22,15,10,33,44,15}
+	fmt.Println("After removing the duplicate element",RemoveDuplicate(arr))
     sortArray(arr)
 	fmt.Println("Result of Sorted Array",arr)
+	
 	fmt.Println("Second largest",SecondLarget(arr))
+	
 }
