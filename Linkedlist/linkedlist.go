@@ -5,7 +5,7 @@ import (
 
 )
 
-//single linked list
+// //single linked list
 type Node struct {
 	data int   // Data value
 	next *Node // Reference
@@ -15,7 +15,7 @@ type LinkedList struct {
 	head *Node
 }
 
-//AddtoHead data into the single linked list
+// //AddtoHead data into the single linked list
 
 func (link *LinkedList) AddtoHead(data int){
 	newNode := &Node{data:data}
@@ -32,14 +32,14 @@ func (link *LinkedList) AddtoHead(data int){
 
 }
 	
-// Display the linked list 
+// // Display the linked list 
 
 func (list *LinkedList)Display(){
 	current := list.head
 
 	fmt.Println("Linked List")
 	for current != nil{
-		fmt.Println(current.data,"")
+		fmt.Printf("%d ->",current.data)
 		current = current.next
 	}
 	fmt.Println()
@@ -56,7 +56,7 @@ func (list *LinkedList)Display(){
 	// }
 	// fmt.Println()
 }
-//link list find the middle of the node
+// //link list find the middle of the node
 func middle(head *Node)*Node{
 	 if head == nil{
 		return nil
@@ -71,7 +71,7 @@ func middle(head *Node)*Node{
 	 return slow
 }
 
-// Reverse the linked list 
+// // Reverse the linked list 
 func (l1 *LinkedList)Reverese(){
 	var prev *Node
 	current := l1.head
@@ -85,7 +85,7 @@ func (l1 *LinkedList)Reverese(){
 	l1.head = prev
 }
 
-//Linked list to array 
+// //Linked list to array 
 
 func linkedListArray(head *Node)[]int{
 	//find the length of array 
@@ -105,7 +105,7 @@ func linkedListArray(head *Node)[]int{
 	return arr
 }
 
-//Delete the middel of node 
+// //Delete the middel of node 
 func (l *LinkedList)DeleteMiddle(){
 	if l.head == nil || l.head.next == nil{
 		return
@@ -139,24 +139,43 @@ func RecuReverseLinked(head *Node)*Node{
 	return newHead
 }
 
-func DuplicateLinked(head *Node)*Node{
-	//Base condition 
-	if head == nil {
-		return head
-	}
-	temp := head
+// // func DuplicateLinked(head *Node)*Node{
+// // 	//Base condition 
+// // 	if head == nil {
+// // 		return head
+// // 	}
+// // 	temp := head
 	
 
-	for temp != nil {
-		ref  := temp
-		for ref.next != nil{
-			if temp.data == ref.data{
-				ref.next = ref.next.next
-			}else{
-				ref = ref.next
-			}
+// // 	for temp != nil {
+// // 		ref  := temp
+// // 		for ref.next != nil{
+// // 			if temp.data == ref.data{
+// // 				ref.next = ref.next.next
+// // 			}else{
+// // 				ref = ref.next
+// // 			}
+// // 		}
+// // 		temp = temp.next
+// // 	}
+// // 	return head
+// // }
+
+func removeDuplicate(head *Node)*Node{
+	if head == nil || head.next == nil {
+		return head
+	}
+	slow := head 
+	fast := head.next
+
+	for fast != nil {
+		if slow.data == fast.data{
+			slow.next = fast.next
+			fast = slow.next
+		}else {
+			slow = slow.next
+			fast = fast.next
 		}
-		temp = temp.next
 	}
 	return head
 }
@@ -186,6 +205,15 @@ func IsPlalindrome(head *Node)bool{
 	return true
 }
 
+
+
+func fib(n int)int{
+	if n <=1{
+		return n 
+	}
+	return fib(n-1)+fib(n-2)
+}
+
 func main() {
 	list := LinkedList{}
 
@@ -212,18 +240,20 @@ func main() {
 	fmt.Println("Deleted the middle of list")
 	list.Display()
 
-	RecuReverseLinked(list.head)
-	fmt.Println("After Reversing the linked list")
+	reversedHead := RecuReverseLinked(list.head)
+	list.head = reversedHead
+	fmt.Println("After Reversing the linked list:")
 	list.Display()
-
 	 index := linkedListArray(list.head)
 	 fmt.Println("After reversing link list to array",index)
 
 	
 	
-	list.head = DuplicateLinked(list.head)
-	fmt.Println("After removing the duplicate",list.head)
+	remove := removeDuplicate(list.head)
+	list.head = remove
+	fmt.Println("After removing the duplicate")
 	list.Display()
-
+	n := 6
+	fmt.Println("Fibinoici number",fib(n))
 	
 }

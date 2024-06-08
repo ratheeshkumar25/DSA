@@ -1,20 +1,48 @@
-package main
 
-import "fmt"
 
-func Palindrome(s string) bool {
-	if len(s) == 0 || len(s)==1 {
-		return true
+func Heapify(arr []int, size int,i int){
+	largest := i
+	left :=  2*i+1
+	right := 2*i+2
+
+	if left < size && arr[left] > arr[largest]{
+		largest = left
 	}
-	if s[0] == s[len(s)-1]{
-		return Palindrome(s[1:len(s)-1])
-	}
-	return false	
+	 if right < size && arr[right] > arr[largest]{
+		largest = right
+	 }
+
+	 if largest != i {
+		arr[i],arr[largest] = arr[largest],arr[i]
+	 }
+	 Heapify(arr,size,largest)
 }
 
-func main(){
-	s := "malayalam"
-	r := "rat"
-	fmt.Println("Number is palindrome",Palindrome(s))
-	fmt.Println("Number is palindrome",Palindrome(r))
+func (b *BST)Insert(val int){
+	newNode := &Node{Val :val}
+
+	if b.root == nil {
+		b.root = newNode
+		return
+	}
+
+	current := b.root 
+
+	for {
+		if val < current.Val{
+			if current.Left != nil{
+				current = current.Left
+				return
+			}
+			current = current.Left
+		}else if val > current.Val{
+			if current.Right != nil{
+				current = current.Right
+				
+			}
+			current 
+		}
+	}
 }
+
+

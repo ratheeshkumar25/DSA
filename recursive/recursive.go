@@ -40,7 +40,7 @@ func ReverseArry(arr[]int,start int , end int)[]int{
 	}
 	arr[start],arr[end] = arr[end],arr[start]
 	//Recursive function 
-	return ReverseArry(arr,start+1,end)
+	return ReverseArry(arr,start+1,end-1)
 }
 
 //Binary Search Using Recurive function

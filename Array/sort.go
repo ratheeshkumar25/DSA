@@ -63,6 +63,17 @@ func RemoveDuplicate(arr []int)[]int{
 	return unique
 }
 
+func ReverseArray(arr []int){
+	start :=0
+	end := len(arr)-1
+
+	for start < end {
+		arr[start],arr[end] = arr[end],arr[start]
+		start++
+		end--
+	}
+
+}
 
 func main(){
 	arr := []int{24,15,15,22,15,10,33,44,15}
@@ -71,5 +82,7 @@ func main(){
 	fmt.Println("Result of Sorted Array",arr)
 	
 	fmt.Println("Second largest",SecondLarget(arr))
+	ReverseArray(arr)
+	fmt.Println("After reverse array",arr)
 	
 }
